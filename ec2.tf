@@ -8,5 +8,6 @@ resource "aws_instance" "foo" {
   key_name = var.keyname
   tags = {
       Name = var.instance_name
+      "costcenter" = "23444"
   }
 }
