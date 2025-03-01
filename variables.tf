@@ -28,3 +28,7 @@ variable "keyname" {
     type = string
     default = "oralogin"
 }
+
+variable "outputip" {
+    default = data.terraform_remote_state.foo.output.instance_ip
+}
