@@ -1,7 +1,7 @@
 variable "instance_name" {
     description = "This is default instance name"
     type = string
-    default = "rhel8"
+    default = "rhel81"
 }
 
 variable "ami" {
@@ -21,4 +21,10 @@ variable "subnetid" {
     description = "This is the Subnet ID"
     type = string
     default = "subnet-0704c036c03980b2d"
+}
+
+variable "keyname" {
+    description = "This is the Key pair name"
+    type = string
+    default = "oralogin"
 }
