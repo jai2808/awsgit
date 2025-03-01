@@ -12,8 +12,3 @@ resource "aws_instance" "foo" {
     "costcenter" = "23444"
   }
 }
-
-
-output "instance_ip" {
-  value = aws_instance.foo.public_ip
-}
