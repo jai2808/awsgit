@@ -55,7 +55,7 @@ pipeline {
                 script {
                     def instance_ip = sh(script: "pwd;cd terraform/ ; terraform output -raw instance_ip", returnStdout: true).trim()
                     echo "Waiting for EC2 instance to be fully up and running..."
-                    echo instance_ip
+                    echo "Instance IP: ${instance_ip}"
                     sh "sleep 120"  // Wait for 120 seconds, adjust as needed
                 }
             }
