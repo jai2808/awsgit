@@ -152,7 +152,7 @@ resource "aws_instance" "foo" {
       "sudo yum install python3-pip",
       "pip3 install awscli",
       "mkdir -p /home/ec2-user/.aws",
-      "aws configure set aws_access_key_id AKIAXAJL2GAQDV47CCZN"
+      "aws configure set aws_access_key_id AKIAXAJL2GAQDV47CCZN",
       "aws s3 cp s3://orasoft-aws/21ai/oracle-database-preinstall-23ai-1.0-2.el9.x86_64.rpm /home/ec2-user/soft"
     ]
   }
