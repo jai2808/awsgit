@@ -8,6 +8,7 @@ resource "aws_vpc" "rhel8-vpc" {
 resource "aws_subnet" "rhel8-subnet" {
   vpc_id     = aws_vpc.rhel8-vpc.id
   cidr_block = "10.0.0.0/24"
+  assign_ipv6_address_on_creation = false
 
   tags = {
     Name = "rhel8-subnet"
@@ -15,7 +16,7 @@ resource "aws_subnet" "rhel8-subnet" {
 }
 
 
-resource "aws_internet_gateway" "rhel8-rt" {
+resource "aws_internet_gateway" "rhel8-igw" {
   vpc_id = aws_vpc.rhel8-vpc.id
   tags = {
     Name = "rhel8-igw"
@@ -30,7 +31,7 @@ resource "aws_route_table" "rhel8-rt" {
   }
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.rhel8-rt.id
+    gateway_id = aws_internet_gateway.rhel8-igw.id
   }
 
   route {
