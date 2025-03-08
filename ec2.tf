@@ -147,11 +147,17 @@ resource "aws_instance" "foo" {
     
     inline = [ 
       "sudo yum update -y",
-      "sudo yum install -y aws-cli",
       "mkdir soft",
       "cd soft",
       "sudo yum install python3-pip",
       "pip3 install awscli",
+      "mkdir -p /home/ec2-user/.aws",
+      "echo '[default]' > /home/ec2-user/.aws/credentials",
+      "echo 'aws_access_key_id = AKIAXAJL2GAQDV47CCZN' >> /home/ec2-user/.aws/credentials",
+      "echo 'aws_secret_access_key = 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' >> /home/ec2-user/.aws/credentials",
+      "echo '[default]' > /home/ec2-user/.aws/config",
+      "echo 'region = us-west-2' >> /home/ec2-user/.aws/config",
+      "echo 'output = json' >> /home/ec2-user/.aws/config",
       "aws s3 cp s3://orasoft-aws/21ai/oracle-database-preinstall-23ai-1.0-2.el9.x86_64.rpm /home/ec2-user/soft"
      ]
   }
