@@ -141,7 +141,7 @@ resource "aws_instance" "foo" {
     connection {
       type = "ssh"
       user = "ec2-user"
-      private_key = "D:\\AWSCloud\\oralogin.ppk"
+      private_key = file("D:/AWSCloud/oralogin.ppk")
       host = self.public_ip
     }
     
