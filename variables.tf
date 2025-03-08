@@ -22,6 +22,6 @@ variable "keyname" {
   default     = "oralogin"
 }
 
-output "EC2IP" {
+output "instance_ip" {
   value = aws_instance.foo.public_ip
 }
