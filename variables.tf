@@ -16,13 +16,6 @@ variable "instancetype" {
     default = "t2.micro"
 }
 
-
-variable "subnetid" {
-    description = "This is the Subnet ID"
-    type = string
-    default = "subnet-0704c036c03980b2d"
-}
-
 variable "keyname" {
     description = "This is the Key pair name"
     type = string
