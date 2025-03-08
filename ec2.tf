@@ -6,8 +6,8 @@ resource "aws_vpc" "rhel8-vpc" {
 }
 
 resource "aws_subnet" "rhel8-subnet" {
-  vpc_id     = aws_vpc.rhel8-vpc.id
-  cidr_block = "10.0.0.0/24"
+  vpc_id                          = aws_vpc.rhel8-vpc.id
+  cidr_block                      = "10.0.0.0/24"
   assign_ipv6_address_on_creation = false
 
   tags = {
@@ -75,7 +75,7 @@ resource "aws_network_acl_rule" "allow_all_outboud" {
 
 resource "aws_security_group" "rhel_sg" {
   name        = "rhel_sg"
-  description = "SG for Full Access"
+  description = "Custom Access to EC2"
   vpc_id      = aws_vpc.rhel8-vpc.id
 
   tags = {
@@ -83,6 +83,46 @@ resource "aws_security_group" "rhel_sg" {
   }
 }
 
+resource "aws_security_group_rule" "ssh" {
+  type              = "ingress"
+  description       = "SSH"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.rhel_sg.id
+}
+
+resource "aws_security_group_rule" "http" {
+  type              = "ingress"
+  description       = "HTTP"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.rhel_sg.id
+}
+
+resource "aws_security_group_rule" "jenkins" {
+  type              = "ingress"
+  description       = "Jenkis"
+  from_port         = 8080
+  to_port           = 8080
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.rhel_sg.id
+}
+
+
+resource "aws_security_group_rule" "egressall" {
+  type              = "egress"
+  description       = "All outboud"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.rhel_sg.id
+}
 
 resource "aws_instance" "foo" {
 
