@@ -55,8 +55,14 @@ pipeline {
                 script {
                     env.IP = sh(script: "pwd;cd terraform/ ; terraform output -raw instance_ip", returnStdout: true).trim()
                     echo "IIP : ${env.IP}"
-                    sh "sleep 120"  // Wait for 120 seconds, adjust as needed
+                    sh "sleep 60"  // Wait for 120 seconds, adjust as needed
                 }
+            }
+        }
+
+        stage('Destroy'){
+            steps{
+                sh 'pwd;cd terraform/ ; terraform destroy -auto-approve'
             }
         }
     }

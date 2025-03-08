@@ -136,4 +136,21 @@ resource "aws_instance" "foo" {
     Name         = var.instance_name
     "costcenter" = "23444"
   }
+
+  provisioner "remote-exec" {
+    connection {
+      type = "ssh"
+      user = "ec2-user"
+      private_key = "D:\AWSCloud\oralogin.ppk"
+      host = self.public_ip
+    }
+    
+    inline = [ 
+      "sudo yum update -y",
+      "sudo yum install -y aws-cli",
+      "mkdir soft",
+      "cd soft",
+      "aws s3 cp s3://orasoft-aws/21ai/oracle-database-preinstall-23ai-1.0-2.el9.x86_64.rpm /home/ec2-user/soft"
+     ]
+  }
 }
