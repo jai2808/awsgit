@@ -127,7 +127,7 @@ resource "aws_instance" "foo" {
   subnet_id                   = aws_subnet.rhel8-subnet.id
   associate_public_ip_address = true
   key_name                    = var.keyname
-  security_groups             = ["sg-06702b76159fecc7d"]
+  security_groups             = [aws_security_group.rhel_sg.id]
   tags = {
     Name         = var.instance_name
     "costcenter" = "23444"
