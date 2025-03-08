@@ -150,6 +150,8 @@ resource "aws_instance" "foo" {
       "sudo yum install -y aws-cli",
       "mkdir soft",
       "cd soft",
+      "sudo yum install python3-pip",
+      "pip3 install awscli",
       "aws s3 cp s3://orasoft-aws/21ai/oracle-database-preinstall-23ai-1.0-2.el9.x86_64.rpm /home/ec2-user/soft"
      ]
   }
