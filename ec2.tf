@@ -2,6 +2,7 @@ resource "aws_vpc" "rhel8-vpc" {
   cidr_block = "10.0.0.0/24"
   tags = {
     Name = "rhel8-vpc"
+    "cost"= "2123"
   }
 }
 
