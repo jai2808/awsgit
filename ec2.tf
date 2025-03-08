@@ -139,13 +139,13 @@ resource "aws_instance" "foo" {
 
   provisioner "remote-exec" {
     connection {
-      type = "ssh"
-      user = "ec2-user"
+      type        = "ssh"
+      user        = "ec2-user"
       private_key = file("D:/AWSCloud/oralogin.pem")
-      host = self.public_ip
+      host        = self.public_ip
     }
-    
-    inline = [ 
+
+    inline = [
       "sudo yum update -y",
       "mkdir soft",
       "cd soft",
@@ -159,6 +159,6 @@ resource "aws_instance" "foo" {
       "echo 'region = us-west-2' >> /home/ec2-user/.aws/config",
       "echo 'output = json' >> /home/ec2-user/.aws/config",
       "aws s3 cp s3://orasoft-aws/21ai/oracle-database-preinstall-23ai-1.0-2.el9.x86_64.rpm /home/ec2-user/soft"
-     ]
+    ]
   }
 }
